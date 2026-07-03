@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 4: Infrastructure Design &mdash; Openstack SDLC  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Phase 5: Environment Preparation" href="phase5.html" />
+    <link rel="prev" title="Phase 3: Solution Planning" href="phase3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Openstack SDLC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="phase1.html">Phase 1: Requirement Gathering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase2.html">Phase 2: Feasibility Study &amp; Requirement Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase3.html">Phase 3: Solution Planning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Phase 4: Infrastructure Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-objectives">Design Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-level-infrastructure-architecture">High-Level Infrastructure Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#physical-infrastructure-design">Physical Infrastructure Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#physical-node-layout">Physical Node Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logical-architecture">Logical Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#service-placement-matrix">Service Placement Matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-design">Network Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-architecture">Network Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-design-table">Network Design Table</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-architecture">Storage Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-availability-design">High Availability Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-design">Security Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scalability-design">Scalability Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="phase5.html">Phase 5: Environment Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase6.html">Phase 6: Deployment &amp; Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase7.html">Phase 7: Testing &amp; Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase8.html">Phase 8: Production Go-Live &amp; Operational Handover</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase9.html">Phase 9: Operations, Monitoring &amp; Continuous Maintenance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Openstack SDLC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Phase 4: Infrastructure Design</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/phase4.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phase-4-infrastructure-design">
+<h1>Phase 4: Infrastructure Design<a class="headerlink" href="#phase-4-infrastructure-design" title="Link to this heading"></a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<p>The Infrastructure Design phase defines the complete architecture of the OpenStack production environment. It specifies how physical servers, network infrastructure, storage components, and OpenStack services will be organized to deliver a scalable, secure, and highly available private cloud platform. The design serves as the blueprint for implementation and ensures consistency throughout deployment, testing, and production operations.</p>
+</section>
+<section id="design-objectives">
+<h2>Design Objectives<a class="headerlink" href="#design-objectives" title="Link to this heading"></a></h2>
+<p>The infrastructure has been designed with the following objectives:</p>
+<ul class="simple">
+<li><p>Build a highly available OpenStack environment.</p></li>
+<li><p>Eliminate single points of failure.</p></li>
+<li><p>Provide scalable compute and storage resources.</p></li>
+<li><p>Separate traffic using dedicated networks.</p></li>
+<li><p>Support enterprise storage integration.</p></li>
+<li><p>Simplify deployment through Kolla-Ansible.</p></li>
+<li><p>Enable future cluster expansion with minimal changes.</p></li>
+<li><p>Maintain secure communication between services.</p></li>
+</ul>
+</section>
+<section id="high-level-infrastructure-architecture">
+<h2>High-Level Infrastructure Architecture<a class="headerlink" href="#high-level-infrastructure-architecture" title="Link to this heading"></a></h2>
+<p><img alt="High-Level Infrastructure Architecture" src="_images/image1.png" /></p>
+</section>
+<section id="physical-infrastructure-design">
+<h2>Physical Infrastructure Design<a class="headerlink" href="#physical-infrastructure-design" title="Link to this heading"></a></h2>
+<section id="physical-node-layout">
+<h3>Physical Node Layout<a class="headerlink" href="#physical-node-layout" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Server Name</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Main Services</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Controller-01</p></td>
+<td><p>Controller + Ceph</p></td>
+<td><p>API Services, Database, RabbitMQ, Ceph MON</p></td>
+</tr>
+<tr class="row-odd"><td><p>Controller-02</p></td>
+<td><p>Controller + Ceph</p></td>
+<td><p>API Services, Database, RabbitMQ, Ceph MON</p></td>
+</tr>
+<tr class="row-even"><td><p>Controller-03</p></td>
+<td><p>Controller + Ceph</p></td>
+<td><p>API Services, Database, RabbitMQ, Ceph MON</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph-01</p></td>
+<td><p>Storage</p></td>
+<td><p>Ceph OSD</p></td>
+</tr>
+<tr class="row-even"><td><p>Compute-01</p></td>
+<td><p>Compute</p></td>
+<td><p>Nova Compute</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compute-02</p></td>
+<td><p>Compute</p></td>
+<td><p>Nova Compute</p></td>
+</tr>
+<tr class="row-even"><td><p>Compute-03</p></td>
+<td><p>Compute</p></td>
+<td><p>Nova Compute</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compute-04</p></td>
+<td><p>Compute</p></td>
+<td><p>Nova Compute</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="logical-architecture">
+<h2>Logical Architecture<a class="headerlink" href="#logical-architecture" title="Link to this heading"></a></h2>
+<p><img alt="Logical Architecture" src="_images/image2.png" /></p>
+<section id="service-placement-matrix">
+<h3>Service Placement Matrix<a class="headerlink" href="#service-placement-matrix" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Service</p></th>
+<th class="head"><p>Controller</p></th>
+<th class="head"><p>Compute</p></th>
+<th class="head"><p>Ceph Node</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Keystone</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Glance</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Nova API</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Nova Compute</p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Neutron Server</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Neutron Agent</p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Horizon</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Placement</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Cinder API</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cinder Volume</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>RabbitMQ</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>MariaDB Galera</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Memcached</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>HAProxy</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Keepalived</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph MON</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph OSD</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="network-design">
+<h2>Network Design<a class="headerlink" href="#network-design" title="Link to this heading"></a></h2>
+<section id="network-architecture">
+<h3>Network Architecture<a class="headerlink" href="#network-architecture" title="Link to this heading"></a></h3>
+<p><img alt="Network Architecture" src="_images/image3.png" /></p>
+</section>
+<section id="network-design-table">
+<h3>Network Design Table<a class="headerlink" href="#network-design-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Network</p></th>
+<th class="head"><p>CIDR (Example)</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Management</p></td>
+<td><p>192.168.10.0/24</p></td>
+<td><p>Node Management</p></td>
+</tr>
+<tr class="row-odd"><td><p>Public API</p></td>
+<td><p>192.168.20.0/24</p></td>
+<td><p>API Access</p></td>
+</tr>
+<tr class="row-even"><td><p>Private API</p></td>
+<td><p>192.168.30.0/24</p></td>
+<td><p>Internal Services</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tunnel</p></td>
+<td><p>192.168.40.0/24</p></td>
+<td><p>VXLAN Traffic</p></td>
+</tr>
+<tr class="row-even"><td><p>Storage Public</p></td>
+<td><p>192.168.50.0/24</p></td>
+<td><p>Ceph Client Access</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage Cluster</p></td>
+<td><p>192.168.60.0/24</p></td>
+<td><p>Ceph Replication</p></td>
+</tr>
+<tr class="row-even"><td><p>External</p></td>
+<td><p>Organization Network</p></td>
+<td><p>Floating IP</p></td>
+</tr>
+<tr class="row-odd"><td><p>iSCSI</p></td>
+<td><p>192.168.70.0/24</p></td>
+<td><p>SAN Storage</p></td>
+</tr>
+<tr class="row-even"><td><p>NAS</p></td>
+<td><p>192.168.80.0/24</p></td>
+<td><p>NAS Storage</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="storage-architecture">
+<h2>Storage Architecture<a class="headerlink" href="#storage-architecture" title="Link to this heading"></a></h2>
+<p><img alt="Storage Architecture" src="_images/image4.png" /></p>
+</section>
+<section id="high-availability-design">
+<h2>High Availability Design<a class="headerlink" href="#high-availability-design" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>HA Method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>API Access</p></td>
+<td><p>HAProxy + Keepalived</p></td>
+</tr>
+<tr class="row-odd"><td><p>Database</p></td>
+<td><p>MariaDB Galera Cluster</p></td>
+</tr>
+<tr class="row-even"><td><p>Messaging</p></td>
+<td><p>RabbitMQ Cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage</p></td>
+<td><p>Ceph Replication</p></td>
+</tr>
+<tr class="row-even"><td><p>Controllers</p></td>
+<td><p>Multi-Controller Deployment</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>High Availability Flow</strong></p>
+<p><img alt="High Availability Flow" src="_images/image5.png" /></p>
+</section>
+<section id="security-design">
+<h2>Security Design<a class="headerlink" href="#security-design" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Security Component</p></th>
+<th class="head"><p>Design Decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Authentication</p></td>
+<td><p>Keystone Identity Service</p></td>
+</tr>
+<tr class="row-odd"><td><p>Authorization</p></td>
+<td><p>RBAC</p></td>
+</tr>
+<tr class="row-even"><td><p>API Encryption</p></td>
+<td><p>TLS/SSL</p></td>
+</tr>
+<tr class="row-odd"><td><p>SSH Access</p></td>
+<td><p>Key-based Authentication</p></td>
+</tr>
+<tr class="row-even"><td><p>Firewall</p></td>
+<td><p>Network-Level Filtering</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tenant Isolation</p></td>
+<td><p>Neutron Security Groups</p></td>
+</tr>
+<tr class="row-even"><td><p>Image Protection</p></td>
+<td><p>Glance Image Validation</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scalability-design">
+<h2>Scalability Design<a class="headerlink" href="#scalability-design" title="Link to this heading"></a></h2>
+<p>The infrastructure has been designed to support future expansion without major architectural changes.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Expansion Capability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Controller Nodes</p></td>
+<td><p>Add additional controllers if required</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compute Nodes</p></td>
+<td><p>Add new compute nodes to increase VM capacity</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph Storage</p></td>
+<td><p>Add OSD disks or new storage nodes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Networks</p></td>
+<td><p>Add new VLANs for future workloads</p></td>
+</tr>
+<tr class="row-even"><td><p>OpenStack Services</p></td>
+<td><p>Enable additional services such as Heat, Magnum, Octavia, or Designate</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phase3.html" class="btn btn-neutral float-left" title="Phase 3: Solution Planning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phase5.html" class="btn btn-neutral float-right" title="Phase 5: Environment Preparation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ashish.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

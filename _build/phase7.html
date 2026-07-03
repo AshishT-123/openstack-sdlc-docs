@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 7: Testing &amp; Validation &mdash; Openstack SDLC  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Phase 8: Production Go-Live &amp; Operational Handover" href="phase8.html" />
+    <link rel="prev" title="Phase 6: Deployment &amp; Configuration" href="phase6.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Openstack SDLC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="phase1.html">Phase 1: Requirement Gathering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase2.html">Phase 2: Feasibility Study &amp; Requirement Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase3.html">Phase 3: Solution Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase4.html">Phase 4: Infrastructure Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase5.html">Phase 5: Environment Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase6.html">Phase 6: Deployment &amp; Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Phase 7: Testing &amp; Validation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-strategy">Testing Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure-validation">Infrastructure Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-testing">Functional Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-testing">Integration Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-machine-validation">Virtual Machine Validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#validation-activities">Validation Activities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-validation">Storage Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-validation">Network Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-availability-ha-testing">High Availability (HA) Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-testing">Performance Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-validation">Security Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acceptance-criteria">Acceptance Criteria</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="phase8.html">Phase 8: Production Go-Live &amp; Operational Handover</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase9.html">Phase 9: Operations, Monitoring &amp; Continuous Maintenance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Openstack SDLC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Phase 7: Testing &amp; Validation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/phase7.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phase-7-testing-validation">
+<h1>Phase 7: Testing &amp; Validation<a class="headerlink" href="#phase-7-testing-validation" title="Link to this heading"></a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<p>The Testing and Validation phase is conducted after the successful installation and configuration of the OpenStack environment. The objective is to verify that all deployed services operate correctly, interact as expected, and satisfy the functional, performance, and availability requirements defined during the planning phase.</p>
+<p>This phase helps identify and resolve issues before the environment is moved into production, ensuring a stable and reliable cloud platform.</p>
+</section>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading"></a></h2>
+<p>The objectives of this phase are to:</p>
+<ul class="simple">
+<li><p>Verify the health of all OpenStack services.</p></li>
+<li><p>Validate communication between OpenStack components.</p></li>
+<li><p>Test compute, networking, and storage operations.</p></li>
+<li><p>Verify High Availability (HA) functionality.</p></li>
+<li><p>Evaluate system performance under workload.</p></li>
+<li><p>Confirm security controls are functioning correctly.</p></li>
+<li><p>Ensure the environment is ready for production deployment.</p></li>
+</ul>
+</section>
+<section id="testing-strategy">
+<h2>Testing Strategy<a class="headerlink" href="#testing-strategy" title="Link to this heading"></a></h2>
+<p>Testing is performed in multiple stages to validate different aspects of the infrastructure.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Testing Level</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Infrastructure Testing</p></td>
+<td><p>Verify hardware, operating system, and network readiness</p></td>
+</tr>
+<tr class="row-odd"><td><p>Functional Testing</p></td>
+<td><p>Validate OpenStack services and features</p></td>
+</tr>
+<tr class="row-even"><td><p>Integration Testing</p></td>
+<td><p>Confirm interaction between integrated services</p></td>
+</tr>
+<tr class="row-odd"><td><p>Performance Testing</p></td>
+<td><p>Measure system performance under load</p></td>
+</tr>
+<tr class="row-even"><td><p>High Availability Testing</p></td>
+<td><p>Validate failover and redundancy mechanisms</p></td>
+</tr>
+<tr class="row-odd"><td><p>Security Testing</p></td>
+<td><p>Verify authentication, authorization, and network protection</p></td>
+</tr>
+<tr class="row-even"><td><p>User Acceptance Testing (UAT)</p></td>
+<td><p>Confirm that the platform meets operational expectations</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="infrastructure-validation">
+<h2>Infrastructure Validation<a class="headerlink" href="#infrastructure-validation" title="Link to this heading"></a></h2>
+<p>Before testing OpenStack services, the infrastructure components should be validated.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Validation Item</p></th>
+<th class="head"><p>Expected Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>All Nodes Reachable</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network Connectivity</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>DNS Resolution</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time Synchronization</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Docker Services</p></td>
+<td><p>Running</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph Cluster</p></td>
+<td><p>HEALTH_OK</p></td>
+</tr>
+<tr class="row-even"><td><p>Storage Devices</p></td>
+<td><p>Accessible</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functional-testing">
+<h2>Functional Testing<a class="headerlink" href="#functional-testing" title="Link to this heading"></a></h2>
+<p>Each OpenStack service is tested individually to verify its functionality.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Service</p></th>
+<th class="head"><p>Test Scenario</p></th>
+<th class="head"><p>Expected Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Keystone</p></td>
+<td><p>User authentication</p></td>
+<td><p>Login successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Glance</p></td>
+<td><p>Upload image</p></td>
+<td><p>Image available</p></td>
+</tr>
+<tr class="row-even"><td><p>Nova</p></td>
+<td><p>Create virtual machine</p></td>
+<td><p>VM created successfully</p></td>
+</tr>
+<tr class="row-odd"><td><p>Neutron</p></td>
+<td><p>Create network</p></td>
+<td><p>Network available</p></td>
+</tr>
+<tr class="row-even"><td><p>Cinder</p></td>
+<td><p>Create volume</p></td>
+<td><p>Volume created</p></td>
+</tr>
+<tr class="row-odd"><td><p>Horizon</p></td>
+<td><p>Access dashboard</p></td>
+<td><p>Dashboard accessible</p></td>
+</tr>
+<tr class="row-even"><td><p>Placement</p></td>
+<td><p>Resource reporting</p></td>
+<td><p>Resources visible</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="integration-testing">
+<h2>Integration Testing<a class="headerlink" href="#integration-testing" title="Link to this heading"></a></h2>
+<p>Integration testing verifies communication between different OpenStack services.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Integration</p></th>
+<th class="head"><p>Validation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nova ↔ Neutron</p></td>
+<td><p>Instance receives network connectivity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nova ↔ Glance</p></td>
+<td><p>Instance boots from image</p></td>
+</tr>
+<tr class="row-even"><td><p>Nova ↔ Cinder</p></td>
+<td><p>Volume attached successfully</p></td>
+</tr>
+<tr class="row-odd"><td><p>Keystone ↔ Horizon</p></td>
+<td><p>User authentication works</p></td>
+</tr>
+<tr class="row-even"><td><p>Neutron ↔ Floating IP</p></td>
+<td><p>External connectivity established</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph ↔ Cinder</p></td>
+<td><p>Volume provisioning successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph ↔ Glance</p></td>
+<td><p>Images stored in Ceph</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="virtual-machine-validation">
+<h2>Virtual Machine Validation<a class="headerlink" href="#virtual-machine-validation" title="Link to this heading"></a></h2>
+<p>A sample virtual machine is created to verify the complete provisioning workflow.</p>
+<section id="validation-activities">
+<h3>Validation Activities<a class="headerlink" href="#validation-activities" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Create project</p></li>
+<li><p>Create user</p></li>
+<li><p>Upload image</p></li>
+<li><p>Create flavor</p></li>
+<li><p>Create network</p></li>
+<li><p>Create subnet</p></li>
+<li><p>Create router</p></li>
+<li><p>Create security group</p></li>
+<li><p>Launch virtual machine</p></li>
+<li><p>Assign floating IP</p></li>
+<li><p>Verify SSH connectivity</p></li>
+</ul>
+</section>
+</section>
+<section id="storage-validation">
+<h2>Storage Validation<a class="headerlink" href="#storage-validation" title="Link to this heading"></a></h2>
+<p>Storage functionality is verified using the following test cases.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test Case</p></th>
+<th class="head"><p>Expected Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Create Volume</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Attach Volume</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Detach Volume</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Delete Volume</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Upload Image</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boot from Volume</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph Health Check</p></td>
+<td><p>HEALTH_OK</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="network-validation">
+<h2>Network Validation<a class="headerlink" href="#network-validation" title="Link to this heading"></a></h2>
+<p>The networking configuration is validated to ensure connectivity across the cloud environment.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>Expected Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal VM Communication</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>External Connectivity</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Floating IP Assignment</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>DHCP Allocation</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>DNS Resolution</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>VXLAN Communication</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-even"><td><p>Router Configuration</p></td>
+<td><p>Operational</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="high-availability-ha-testing">
+<h2>High Availability (HA) Testing<a class="headerlink" href="#high-availability-ha-testing" title="Link to this heading"></a></h2>
+<p>To verify resilience, failover scenarios are executed.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Expected Behaviour</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Controller Node Failure</p></td>
+<td><p>Services continue from remaining controllers</p></td>
+</tr>
+<tr class="row-odd"><td><p>RabbitMQ Failure</p></td>
+<td><p>Cluster remains operational</p></td>
+</tr>
+<tr class="row-even"><td><p>Database Node Failure</p></td>
+<td><p>Galera continues operating</p></td>
+</tr>
+<tr class="row-odd"><td><p>HAProxy Failure</p></td>
+<td><p>VIP switches to another node</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph OSD Failure</p></td>
+<td><p>Storage remains available</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compute Node Failure</p></td>
+<td><p>Other compute nodes continue serving workloads</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="performance-testing">
+<h2>Performance Testing<a class="headerlink" href="#performance-testing" title="Link to this heading"></a></h2>
+<p>Performance tests ensure that the infrastructure can handle expected workloads.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test Area</p></th>
+<th class="head"><p>Validation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CPU Utilization</p></td>
+<td><p>Within acceptable threshold</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory Usage</p></td>
+<td><p>Stable under load</p></td>
+</tr>
+<tr class="row-even"><td><p>Disk Performance</p></td>
+<td><p>Acceptable IOPS</p></td>
+</tr>
+<tr class="row-odd"><td><p>API Response Time</p></td>
+<td><p>Meets operational requirements</p></td>
+</tr>
+<tr class="row-even"><td><p>VM Boot Time</p></td>
+<td><p>Within defined benchmark</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network Throughput</p></td>
+<td><p>Meets expected bandwidth</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="security-validation">
+<h2>Security Validation<a class="headerlink" href="#security-validation" title="Link to this heading"></a></h2>
+<p>The security posture of the deployment is verified.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Validation</p></th>
+<th class="head"><p>Expected Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Keystone Authentication</p></td>
+<td><p>Successful</p></td>
+</tr>
+<tr class="row-odd"><td><p>Role-Based Access Control</p></td>
+<td><p>Policies enforced</p></td>
+</tr>
+<tr class="row-even"><td><p>Security Groups</p></td>
+<td><p>Traffic filtered correctly</p></td>
+</tr>
+<tr class="row-odd"><td><p>SSH Access</p></td>
+<td><p>Restricted to authorized users</p></td>
+</tr>
+<tr class="row-even"><td><p>API Access</p></td>
+<td><p>Accessible only to authorized users</p></td>
+</tr>
+<tr class="row-odd"><td><p>TLS Communication</p></td>
+<td><p>Secure connections established</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="acceptance-criteria">
+<h2>Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Link to this heading"></a></h2>
+<p>The environment will be considered ready for production when:</p>
+<ul class="simple">
+<li><p>All OpenStack services are operational.</p></li>
+<li><p>All functional test cases pass.</p></li>
+<li><p>Integration between services is successful.</p></li>
+<li><p>High Availability tests complete successfully.</p></li>
+<li><p>Storage and networking operate without errors.</p></li>
+<li><p>No critical issues remain unresolved.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phase6.html" class="btn btn-neutral float-left" title="Phase 6: Deployment &amp; Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phase8.html" class="btn btn-neutral float-right" title="Phase 8: Production Go-Live &amp; Operational Handover" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ashish.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

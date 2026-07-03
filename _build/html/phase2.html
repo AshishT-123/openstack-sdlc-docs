@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 2: Feasibility Study &amp; Requirement Analysis &mdash; Openstack SDLC  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Phase 3: Solution Planning" href="phase3.html" />
+    <link rel="prev" title="Phase 1: Requirement Gathering" href="phase1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Openstack SDLC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="phase1.html">Phase 1: Requirement Gathering</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Phase 2: Feasibility Study &amp; Requirement Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#existing-infrastructure-assessment">Existing Infrastructure Assessment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#existing-infrastructure-summary">Existing Infrastructure Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gap-analysis">Gap Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-feasibility">Technical Feasibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#technology-evaluation">Technology Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cluster-sizing-analysis">Cluster Sizing Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#proposed-cluster">Proposed Cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-capacity-planning">Compute Capacity Planning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compute-resource-planning">Compute Resource Planning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-feasibility-analysis">Network Feasibility Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#planned-network-segments">Planned Network Segments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-feasibility-analysis">Storage Feasibility Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#storage-architecture">Storage Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#future-enterprise-storage-integration">Future Enterprise Storage Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#high-availability-feasibility">High Availability Feasibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-feasibility">Security Feasibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#security-features">Security Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-tool-evaluation">Deployment Tool Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-technology-stack-what-we-use-and-why">Core Technology Stack — What We Use and Why</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openstack-version-comparison-why-gazpacho-instead-of-dalmatian">OpenStack Version Comparison — Why Gazpacho Instead of Dalmatian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#latest-vs-recommended-stable-version">Latest vs Recommended-Stable Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#risk-assessment">Risk Assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="phase3.html">Phase 3: Solution Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase4.html">Phase 4: Infrastructure Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase5.html">Phase 5: Environment Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase6.html">Phase 6: Deployment &amp; Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase7.html">Phase 7: Testing &amp; Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase8.html">Phase 8: Production Go-Live &amp; Operational Handover</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase9.html">Phase 9: Operations, Monitoring &amp; Continuous Maintenance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Openstack SDLC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Phase 2: Feasibility Study &amp; Requirement Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/phase2.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phase-2-feasibility-study-requirement-analysis">
+<h1>Phase 2: Feasibility Study &amp; Requirement Analysis<a class="headerlink" href="#phase-2-feasibility-study-requirement-analysis" title="Link to this heading"></a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<p>The Feasibility Study and Requirement Analysis phase is carried out to evaluate whether the proposed OpenStack private cloud can be successfully implemented using the available infrastructure, software, and organizational resources. This phase validates the requirements gathered in Phase 1 and identifies the most suitable architecture, deployment methodology, and technology stack for a production-grade environment.</p>
+<p>The outcome of this phase provides confidence that the proposed solution is technically feasible, scalable, secure, and capable of meeting future business requirements.</p>
+</section>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading"></a></h2>
+<p>The primary objectives of this phase are:</p>
+<ul class="simple">
+<li><p>Analyze the requirements collected during the Requirement Gathering phase.</p></li>
+<li><p>Evaluate the feasibility of deploying a production-grade OpenStack environment.</p></li>
+<li><p>Assess available hardware, storage, and networking resources.</p></li>
+<li><p>Select the appropriate OpenStack release and deployment tool.</p></li>
+<li><p>Identify infrastructure gaps and required enhancements.</p></li>
+<li><p>Estimate compute, storage, and network capacity.</p></li>
+<li><p>Identify risks and mitigation strategies.</p></li>
+<li><p>Finalize the production architecture before implementation.</p></li>
+</ul>
+</section>
+<section id="existing-infrastructure-assessment">
+<h2>Existing Infrastructure Assessment<a class="headerlink" href="#existing-infrastructure-assessment" title="Link to this heading"></a></h2>
+<p>Before deployment, the available infrastructure was assessed to determine whether it meets the requirements for a highly available OpenStack production cluster.</p>
+<section id="existing-infrastructure-summary">
+<h3>Existing Infrastructure Summary<a class="headerlink" href="#existing-infrastructure-summary" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Remarks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Physical Servers</p></td>
+<td><p>Available</p></td>
+<td><p>8 Enterprise Servers</p></td>
+</tr>
+<tr class="row-odd"><td><p>CPU Resources</p></td>
+<td><p>Available</p></td>
+<td><p>Suitable for virtualization workloads</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory</p></td>
+<td><p>Available</p></td>
+<td><p>Supports production deployment</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network Switches</p></td>
+<td><p>Available</p></td>
+<td><p>Enterprise Managed Switches</p></td>
+</tr>
+<tr class="row-even"><td><p>Storage Network</p></td>
+<td><p>Available</p></td>
+<td><p>Dedicated Storage Connectivity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Management Network</p></td>
+<td><p>Available</p></td>
+<td><p>Separate Management VLAN</p></td>
+</tr>
+<tr class="row-even"><td><p>Internet Connectivity</p></td>
+<td><p>Available</p></td>
+<td><p>Required for repository access and updates</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rack Space</p></td>
+<td><p>Available</p></td>
+<td><p>Production Data Center</p></td>
+</tr>
+<tr class="row-even"><td><p>Power Redundancy</p></td>
+<td><p>Available</p></td>
+<td><p>UPS and redundant power supply</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="gap-analysis">
+<h2>Gap Analysis<a class="headerlink" href="#gap-analysis" title="Link to this heading"></a></h2>
+<p>The gap analysis identifies the difference between the current infrastructure and the desired production architecture.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Existing State</p></th>
+<th class="head"><p>Required State</p></th>
+<th class="head"><p>Gap</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Standalone servers</p></td>
+<td><p>HA OpenStack Cluster</p></td>
+<td><p>Cluster configuration required</p></td>
+</tr>
+<tr class="row-odd"><td><p>Basic networking</p></td>
+<td><p>Multiple isolated production networks</p></td>
+<td><p>VLAN implementation required</p></td>
+</tr>
+<tr class="row-even"><td><p>Local storage</p></td>
+<td><p>Distributed Ceph Storage</p></td>
+<td><p>Ceph deployment required</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manual deployment</p></td>
+<td><p>Automated deployment</p></td>
+<td><p>Kolla-Ansible required</p></td>
+</tr>
+<tr class="row-even"><td><p>Single point monitoring</p></td>
+<td><p>Centralized monitoring</p></td>
+<td><p>Monitoring stack required</p></td>
+</tr>
+<tr class="row-odd"><td><p>No load balancing</p></td>
+<td><p>HAProxy and Keepalived</p></td>
+<td><p>HA configuration required</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="technical-feasibility">
+<h2>Technical Feasibility<a class="headerlink" href="#technical-feasibility" title="Link to this heading"></a></h2>
+<p>The proposed solution is technically feasible because the selected technologies are well-supported, production-ready, and compatible with enterprise environments.</p>
+<section id="technology-evaluation">
+<h3>Technology Evaluation<a class="headerlink" href="#technology-evaluation" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technology</p></th>
+<th class="head"><p>Selection</p></th>
+<th class="head"><p>Justification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenStack Release</p></td>
+<td><p>Gazpacho</p></td>
+<td><p>Stable enterprise release</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deployment Tool</p></td>
+<td><p>Kolla-Ansible</p></td>
+<td><p>Automated containerized deployment</p></td>
+</tr>
+<tr class="row-even"><td><p>Container Runtime</p></td>
+<td><p>Docker</p></td>
+<td><p>Lightweight and production proven</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage</p></td>
+<td><p>Ceph</p></td>
+<td><p>Scalable distributed storage</p></td>
+</tr>
+<tr class="row-even"><td><p>Operating System</p></td>
+<td><p>Ubuntu Server LTS</p></td>
+<td><p>Long-term support</p></td>
+</tr>
+<tr class="row-odd"><td><p>Automation</p></td>
+<td><p>Ansible</p></td>
+<td><p>Agentless automation</p></td>
+</tr>
+<tr class="row-even"><td><p>Load Balancer</p></td>
+<td><p>HAProxy</p></td>
+<td><p>High Availability</p></td>
+</tr>
+<tr class="row-odd"><td><p>Virtual IP</p></td>
+<td><p>Keepalived</p></td>
+<td><p>Automatic failover</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cluster-sizing-analysis">
+<h2>Cluster Sizing Analysis<a class="headerlink" href="#cluster-sizing-analysis" title="Link to this heading"></a></h2>
+<p>Based on the collected requirements, the following production cluster configuration has been finalized.</p>
+<section id="proposed-cluster">
+<h3>Proposed Cluster<a class="headerlink" href="#proposed-cluster" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Node Type</p></th>
+<th class="head"><p>Quantity</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Controller + Ceph</p></td>
+<td><p>3</p></td>
+<td><p>OpenStack Control Plane + Ceph MON/MGR</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dedicated Ceph</p></td>
+<td><p>1</p></td>
+<td><p>Additional Storage Services</p></td>
+</tr>
+<tr class="row-even"><td><p>Compute</p></td>
+<td><p>4</p></td>
+<td><p>Virtual Machine Hosting</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total</strong></p></td>
+<td><p><strong>8</strong></p></td>
+<td><p>Production Cluster</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="compute-capacity-planning">
+<h2>Compute Capacity Planning<a class="headerlink" href="#compute-capacity-planning" title="Link to this heading"></a></h2>
+<p>The compute layer has been designed to support enterprise virtual machine workloads while maintaining room for future expansion.</p>
+<section id="compute-resource-planning">
+<h3>Compute Resource Planning<a class="headerlink" href="#compute-resource-planning" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Compute Nodes</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Virtualization</p></td>
+<td><p>KVM</p></td>
+</tr>
+<tr class="row-even"><td><p>Hypervisor</p></td>
+<td><p>QEMU/KVM</p></td>
+</tr>
+<tr class="row-odd"><td><p>VM Scheduling</p></td>
+<td><p>Nova Scheduler</p></td>
+</tr>
+<tr class="row-even"><td><p>Live Migration</p></td>
+<td><p>Enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>CPU Allocation Ratio</p></td>
+<td><p>As per workload policy</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory Allocation</p></td>
+<td><p>Optimized for production</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="network-feasibility-analysis">
+<h2>Network Feasibility Analysis<a class="headerlink" href="#network-feasibility-analysis" title="Link to this heading"></a></h2>
+<p>A dedicated network design has been selected to isolate different traffic types, improving security, performance, and fault tolerance.</p>
+<section id="planned-network-segments">
+<h3>Planned Network Segments<a class="headerlink" href="#planned-network-segments" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Network</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Out-of-Band</p></td>
+<td><p>Remote Hardware Management</p></td>
+</tr>
+<tr class="row-odd"><td><p>Management</p></td>
+<td><p>Server Administration</p></td>
+</tr>
+<tr class="row-even"><td><p>Public API</p></td>
+<td><p>External API Access</p></td>
+</tr>
+<tr class="row-odd"><td><p>Private API</p></td>
+<td><p>Internal Service Communication</p></td>
+</tr>
+<tr class="row-even"><td><p>Tunnel</p></td>
+<td><p>VXLAN/GRE Traffic</p></td>
+</tr>
+<tr class="row-odd"><td><p>Self-Service</p></td>
+<td><p>Tenant Networks</p></td>
+</tr>
+<tr class="row-even"><td><p>Storage Public</p></td>
+<td><p>Client Access to Ceph</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage Cluster</p></td>
+<td><p>Ceph Replication</p></td>
+</tr>
+<tr class="row-even"><td><p>External</p></td>
+<td><p>Internet Access</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enterprise iSCSI</p></td>
+<td><p>SAN Connectivity</p></td>
+</tr>
+<tr class="row-even"><td><p>Enterprise NAS</p></td>
+<td><p>NAS Connectivity</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="storage-feasibility-analysis">
+<h2>Storage Feasibility Analysis<a class="headerlink" href="#storage-feasibility-analysis" title="Link to this heading"></a></h2>
+<p>The storage layer is designed using Ceph to provide distributed, fault-tolerant, and scalable storage for OpenStack services.</p>
+<section id="storage-architecture">
+<h3>Storage Architecture<a class="headerlink" href="#storage-architecture" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Storage Service</p></th>
+<th class="head"><p>Backend</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nova Ephemeral Storage</p></td>
+<td><p>Ceph RBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cinder Volumes</p></td>
+<td><p>Ceph RBD</p></td>
+</tr>
+<tr class="row-even"><td><p>Glance Images</p></td>
+<td><p>Ceph RBD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backups</p></td>
+<td><p>Ceph</p></td>
+</tr>
+<tr class="row-even"><td><p>Object Storage</p></td>
+<td><p>Ceph</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="future-enterprise-storage-integration">
+<h3>Future Enterprise Storage Integration<a class="headerlink" href="#future-enterprise-storage-integration" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Storage Type</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>iSCSI SAN</p></td>
+<td><p>High-performance block storage</p></td>
+</tr>
+<tr class="row-odd"><td><p>NAS</p></td>
+<td><p>Shared file storage</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="high-availability-feasibility">
+<h2>High Availability Feasibility<a class="headerlink" href="#high-availability-feasibility" title="Link to this heading"></a></h2>
+<p>The production environment is designed without any single point of failure.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>HA Mechanism</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Controllers</p></td>
+<td><p>Multi-Controller Cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>Database</p></td>
+<td><p>MariaDB Galera</p></td>
+</tr>
+<tr class="row-even"><td><p>Messaging</p></td>
+<td><p>RabbitMQ Cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>APIs</p></td>
+<td><p>HAProxy</p></td>
+</tr>
+<tr class="row-even"><td><p>Virtual IP</p></td>
+<td><p>Keepalived</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage</p></td>
+<td><p>Ceph Replication</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="security-feasibility">
+<h2>Security Feasibility<a class="headerlink" href="#security-feasibility" title="Link to this heading"></a></h2>
+<p>The proposed architecture supports enterprise security standards.</p>
+<section id="security-features">
+<h3>Security Features<a class="headerlink" href="#security-features" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Keystone Authentication</p></td>
+<td><p>Identity Management</p></td>
+</tr>
+<tr class="row-odd"><td><p>RBAC</p></td>
+<td><p>Role-Based Access Control</p></td>
+</tr>
+<tr class="row-even"><td><p>Security Groups</p></td>
+<td><p>Network Isolation</p></td>
+</tr>
+<tr class="row-odd"><td><p>TLS</p></td>
+<td><p>Secure API Communication</p></td>
+</tr>
+<tr class="row-even"><td><p>SSH Key Authentication</p></td>
+<td><p>Secure Server Access</p></td>
+</tr>
+<tr class="row-odd"><td><p>Firewall Rules</p></td>
+<td><p>Network Protection</p></td>
+</tr>
+<tr class="row-even"><td><p>Audit Logging</p></td>
+<td><p>User Activity Tracking</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="deployment-tool-evaluation">
+<h2>Deployment Tool Evaluation<a class="headerlink" href="#deployment-tool-evaluation" title="Link to this heading"></a></h2>
+<p>Several deployment methods were evaluated before selecting Kolla-Ansible.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Deployment Method</p></th>
+<th class="head"><p>Advantages</p></th>
+<th class="head"><p>Limitations</p></th>
+<th class="head"><p>Decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Manual Deployment</p></td>
+<td><p>Full Control</p></td>
+<td><p>Time-consuming, error-prone</p></td>
+<td><p>Not Selected</p></td>
+</tr>
+<tr class="row-odd"><td><p>DevStack</p></td>
+<td><p>Suitable for Development</p></td>
+<td><p>Not Production Ready</p></td>
+<td><p>Not Selected</p></td>
+</tr>
+<tr class="row-even"><td><p>OpenStack-Ansible</p></td>
+<td><p>Flexible</p></td>
+<td><p>Higher operational complexity</p></td>
+<td><p>Not Selected</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kolla-Ansible</p></td>
+<td><p>Containerized, automated, HA support, easier lifecycle management</p></td>
+<td><p>Requires Docker environment</p></td>
+<td><p><strong>Selected</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="core-technology-stack-what-we-use-and-why">
+<h2>Core Technology Stack — What We Use and Why<a class="headerlink" href="#core-technology-stack-what-we-use-and-why" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Role in this Cluster</p></th>
+<th class="head"><p>Why this Component</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenStack (Gazpacho, 2026.1)</p></td>
+<td><p>Cloud control plane for compute, networking, and storage services</p></td>
+<td><p>Current SLURP release, actively maintained, suitable for enterprise production environments.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kolla-Ansible</p></td>
+<td><p>Deploys and manages OpenStack services as containers</p></td>
+<td><p>Simplifies deployment, upgrades, rollback, and supports High Availability (HA).</p></td>
+</tr>
+<tr class="row-even"><td><p>Ubuntu Server 24.04 LTS</p></td>
+<td><p>Host operating system for all cluster nodes</p></td>
+<td><p>Long-term support, stable, secure, and fully compatible with Kolla-Ansible and Ceph.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Docker CE</p></td>
+<td><p>Container runtime for OpenStack services</p></td>
+<td><p>Most widely tested runtime for Kolla-Ansible with strong community support.</p></td>
+</tr>
+<tr class="row-even"><td><p>Ceph (Tentacle, 20.2.x)</p></td>
+<td><p>Unified storage backend for block, object, and image storage</p></td>
+<td><p>Provides scalable, replicated, and highly available storage for OpenStack services.</p></td>
+</tr>
+<tr class="row-odd"><td><p>OVN (Neutron ML2/OVN)</p></td>
+<td><p>Software-defined networking backend</p></td>
+<td><p>Delivers distributed networking with lower overhead and better scalability.</p></td>
+</tr>
+<tr class="row-even"><td><p>MariaDB Galera Cluster</p></td>
+<td><p>Central database for all OpenStack services</p></td>
+<td><p>Multi-master database replication providing high availability and fault tolerance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RabbitMQ Cluster</p></td>
+<td><p>Message broker for inter-service communication</p></td>
+<td><p>Ensures reliable messaging and high availability across OpenStack services.</p></td>
+</tr>
+<tr class="row-even"><td><p>Memcached</p></td>
+<td><p>Token and session caching for Keystone</p></td>
+<td><p>Improves authentication performance by reducing database queries.</p></td>
+</tr>
+<tr class="row-odd"><td><p>HAProxy + Keepalived</p></td>
+<td><p>Load balancing and Virtual IP (VIP) management</p></td>
+<td><p>Provides API load balancing and automatic failover for controller High Availability.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="openstack-version-comparison-why-gazpacho-instead-of-dalmatian">
+<h2>OpenStack Version Comparison — Why Gazpacho Instead of Dalmatian<a class="headerlink" href="#openstack-version-comparison-why-gazpacho-instead-of-dalmatian" title="Link to this heading"></a></h2>
+<p>The previous design referenced Dalmatian (2024.2). That release has now reached end of life (EOL 29 April 2026) and no longer receives security patches — it should not be used for a new production build. The table below compares recent releases.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Release</p></th>
+<th class="head"><p>Series</p></th>
+<th class="head"><p>SLURP</p></th>
+<th class="head"><p>Status (Mid-2026)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Yoga</p></td>
+<td><p>2023.1 Era</p></td>
+<td><p>No</p></td>
+<td><p>Obsolete / Unmaintained</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zed</p></td>
+<td><p>2022.2</p></td>
+<td><p>No</p></td>
+<td><p>Obsolete / Unmaintained</p></td>
+</tr>
+<tr class="row-even"><td><p>Antelope</p></td>
+<td><p>2023.1</p></td>
+<td><p>Yes</p></td>
+<td><p>Unmaintained</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bobcat</p></td>
+<td><p>2023.2</p></td>
+<td><p>No</p></td>
+<td><p>Unmaintained</p></td>
+</tr>
+<tr class="row-even"><td><p>Caracal</p></td>
+<td><p>2024.1</p></td>
+<td><p>Yes</p></td>
+<td><p>Unmaintained</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dalmatian</p></td>
+<td><p>2024.2</p></td>
+<td><p>No</p></td>
+<td><p>End of Life (29 Apr 2026) – Do Not Use</p></td>
+</tr>
+<tr class="row-even"><td><p>Epoxy</p></td>
+<td><p>2025.1</p></td>
+<td><p>Yes</p></td>
+<td><p>Maintained (Unmaintained from Oct 2026)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Flamingo</p></td>
+<td><p>2025.2</p></td>
+<td><p>No</p></td>
+<td><p>Maintained until Apr 2027</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gazpacho (Selected)</strong></p></td>
+<td><p><strong>2026.1</strong></p></td>
+<td><p><strong>Yes</strong></p></td>
+<td><p><strong>Current Release, Actively Maintained</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="latest-vs-recommended-stable-version">
+<h2>Latest vs Recommended-Stable Version<a class="headerlink" href="#latest-vs-recommended-stable-version" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Latest Available (Mid-2026)</p></th>
+<th class="head"><p>Recommended for This Build</p></th>
+<th class="head"><p>Reason</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OpenStack</p></td>
+<td><p>2026.1 Gazpacho</p></td>
+<td><p>2026.1 Gazpacho</p></td>
+<td><p>Current SLURP release with long-term support and enterprise stability.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kolla-Ansible</p></td>
+<td><p>2026.1 Branch</p></td>
+<td><p>2026.1 Branch</p></td>
+<td><p>Must match the OpenStack release exactly for compatibility.</p></td>
+</tr>
+<tr class="row-even"><td><p>Ubuntu Server</p></td>
+<td><p>26.04 LTS (Apr 2026)</p></td>
+<td><p>24.04 LTS</p></td>
+<td><p>Proven compatibility with Kolla-Ansible, Ceph, and production deployments.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph</p></td>
+<td><p>20.2.2 Tentacle</p></td>
+<td><p>20.2.2 Tentacle</p></td>
+<td><p>Better long-term support; recommended for enterprise storage deployments.</p></td>
+</tr>
+<tr class="row-even"><td><p>MariaDB</p></td>
+<td><p>12.x Rolling</p></td>
+<td><p>11.4 LTS (or 12.3 LTS once qualified)</p></td>
+<td><p>Extended support lifecycle and production stability.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RabbitMQ</p></td>
+<td><p>4.3.x</p></td>
+<td><p>4.2.x (Long-Support Branch)</p></td>
+<td><p>Extended support lifecycle and production stability.</p></td>
+</tr>
+<tr class="row-even"><td><p>Docker CE</p></td>
+<td><p>Current Stable Channel</p></td>
+<td><p>Version bundled with Kolla-Ansible at deployment time</p></td>
+<td><p>Use the version validated by Kolla-Ansible 2026.1 requirements.</p></td>
+</tr>
+<tr class="row-odd"><td><p>OVN</p></td>
+<td><p>Maintained in sync with OpenStack</p></td>
+<td><p>Gazpacho / Neutron 2026.1</p></td>
+<td><p>Maintained in sync with the OpenStack release for compatibility.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="risk-assessment">
+<h2>Risk Assessment<a class="headerlink" href="#risk-assessment" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Risk</p></th>
+<th class="head"><p>Impact</p></th>
+<th class="head"><p>Mitigation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hardware Failure</p></td>
+<td><p>High</p></td>
+<td><p>Multi-controller HA and Ceph replication</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network Failure</p></td>
+<td><p>High</p></td>
+<td><p>Redundant network paths and VLAN separation</p></td>
+</tr>
+<tr class="row-even"><td><p>Storage Failure</p></td>
+<td><p>High</p></td>
+<td><p>Ceph replication and monitoring</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deployment Failure</p></td>
+<td><p>Medium</p></td>
+<td><p>Validate inventory and run pre-checks</p></td>
+</tr>
+<tr class="row-even"><td><p>Configuration Errors</p></td>
+<td><p>Medium</p></td>
+<td><p>Peer review and staged deployment</p></td>
+</tr>
+<tr class="row-odd"><td><p>Capacity Exhaustion</p></td>
+<td><p>Medium</p></td>
+<td><p>Regular capacity monitoring and scaling</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="constraints">
+<h2>Constraints<a class="headerlink" href="#constraints" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Constraint</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hardware Resources</p></td>
+<td><p>Limited to the initial 8-node cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deployment Window</p></td>
+<td><p>Must align with approved maintenance schedule</p></td>
+</tr>
+<tr class="row-even"><td><p>Network Configuration</p></td>
+<td><p>Requires coordination with the network team</p></td>
+</tr>
+<tr class="row-odd"><td><p>Storage Capacity</p></td>
+<td><p>Limited by available disks until expansion</p></td>
+</tr>
+<tr class="row-even"><td><p>Budget</p></td>
+<td><p>Must remain within the approved infrastructure budget</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phase1.html" class="btn btn-neutral float-left" title="Phase 1: Requirement Gathering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phase3.html" class="btn btn-neutral float-right" title="Phase 3: Solution Planning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ashish.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
