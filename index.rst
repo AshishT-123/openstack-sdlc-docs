@@ -1,21 +1,21 @@
-.. Openstack SDLC documentation master file, created by
-   sphinx-quickstart on Fri Jul  3 11:18:27 2026.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Openstack SDLC documentation master file
 
 Openstack SDLC documentation
-============================
+=============================
 
 Add your content using ``reStructuredText`` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
 documentation for details.
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Related Documentation
 
-
+   ceph
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: OpenStack Documentation:
 
    phase1
    phase2
@@ -26,10 +26,3 @@ documentation for details.
    phase7
    phase8
    phase9
-
-
-   .. toctree::
-   :maxdepth: 1
-   :caption: Related Documentation
-
-   Ceph Documentation <https://openstack-sdlc-docs.readthedocs.io/projects/ceph-openstack-docs/en/latest/>
