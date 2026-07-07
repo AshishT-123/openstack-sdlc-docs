@@ -26,3 +26,10 @@ documentation for details.
    phase7
    phase8
    phase9
+
+
+   .. toctree::
+   :maxdepth: 1
+   :caption: Related Documentation
+
+   Ceph Documentation <https://openstack-sdlc-docs.readthedocs.io/projects/ceph-openstack-docs/en/latest/>
