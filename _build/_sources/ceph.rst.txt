@@ -1,4 +1,4 @@
-Ceph Documentation
+Ceph 
 ===================
 
 .. toctree::

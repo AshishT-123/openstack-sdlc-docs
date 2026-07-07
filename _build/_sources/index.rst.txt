@@ -9,13 +9,13 @@ documentation for details.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Related Documentation
+   :caption: Storage
 
    ceph
 
 .. toctree::
    :maxdepth: 2
-   :caption: OpenStack Documentation:
+   :caption: OpenStack Deployment Guide
 
    phase1
    phase2
@@ -26,3 +26,9 @@ documentation for details.
    phase7
    phase8
    phase9
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Monitoring & Compliance
+
+   monitoring-security
